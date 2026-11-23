@@ -1,0 +1,43 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": { "api/*.ts": { "maxDuration": 60 } },
+  "rewrites": [
+    {
+      "source": "/manifest.json",
+      "destination": "/api/addon?route=manifest.json"
+    },
+    {
+      "source": "/:config/manifest.json",
+      "destination": "/api/addon?route=:config/manifest.json"
+    },
+    {
+      "source": "/:config/catalog/:type/:id/:extra.json",
+      "destination": "/api/addon?route=:config/catalog/:type/:id/:extra.json"
+    },
+    {
+      "source": "/:config/catalog/:type/:id.json",
+      "destination": "/api/addon?route=:config/catalog/:type/:id.json"
+    },
+    {
+      "source": "/:config/meta/:type/:id.json",
+      "destination": "/api/addon?route=:config/meta/:type/:id.json"
+    },
+    { "source": "/configure", "destination": "/index.html" },
+    { "source": "/:config/configure", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
