@@ -24,7 +24,12 @@ export const platforms = [
   {
     key: 'apple',
     name: 'Apple TV+',
-    aliases: ['Apple TV Plus', 'Apple TV+', 'Apple TV Subscription'],
+    aliases: [
+      'Apple TV Plus',
+      'Apple TV+',
+      'Apple TV Subscription',
+      'Apple TV',
+    ],
     color: '#aab5c4',
     mark: 'tv+',
   },
